@@ -1017,7 +1017,7 @@ export default function Home() {
                       Por favor, envía tu pago de 10 soles por WhatsApp para desbloquear la fase <strong>{activePhase?.name}</strong>.
                     </p>
                     <a 
-                      href={`https://wa.me/51999999999?text=Hola%20Admin,%20he%20realizado%20mi%20pago%20de%2010%20soles%20para%20la%20fase%20${encodeURIComponent(activePhase?.name || '')}.%20Activa%20mi%20participación.`} 
+                      href={`https://wa.me/51997960224?text=Hola%20Admin,%20he%20realizado%20mi%20pago%20de%2010%20soles%20para%20la%20fase%20${encodeURIComponent(activePhase?.name || '')}.%20Activa%20mi%20participación.`} 
                       target="_blank" 
                       rel="noopener noreferrer" 
                       className="mt-3.5 inline-flex items-center space-x-2 text-xs font-black text-[#030c08] bg-[#25D366] hover:bg-[#20ba5a] px-4 py-2.5 rounded-xl transition-all shadow-md shadow-[#25D366]/10 hover:shadow-[#25D366]/20 font-title uppercase tracking-wider"
@@ -1506,7 +1506,7 @@ export default function Home() {
 
             <div className="mt-6 flex flex-col space-y-2 font-title">
               <a 
-                href={`https://wa.me/51999999999?text=Hola%20Admin,%20he%20realizado%20mi%20pago%20de%2010%20soles%20para%20la%20fase%20${encodeURIComponent(activePhase?.name || '')}.%20Activa%20mi%20participación.`} 
+                href={`https://wa.me/51997960224?text=Hola%20Admin,%20he%20realizado%20mi%20pago%20de%2010%20soles%20para%20la%20fase%20${encodeURIComponent(activePhase?.name || '')}.%20Activa%20mi%20participación.`} 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="w-full py-3 bg-[#25D366] hover:bg-[#20ba5a] text-[#030c08] font-black rounded-xl text-center shadow-lg shadow-[#25D366]/10 flex items-center justify-center space-x-2 transition-all uppercase tracking-wider text-xs"
