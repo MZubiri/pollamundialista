@@ -1,0 +1,98 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum PhaseStatus {
+  LOCKED
+  OPEN
+  CLOSED
+}
+
+enum MatchStatus {
+  PENDING
+  PLAYED
+}
+
+model User {
+  id            String            @id @default(uuid())
+  name          String
+  email         String            @unique
+  passwordHash  String
+  role          Role              @default(USER)
+  status        UserStatus        @default(INACTIVE)
+  createdAt     DateTime          @default(now())
+  predictions   Prediction[]
+  phaseStatuses UserPhaseStatus[]
+
+  @@map("users")
+}
+
+model Phase {
+  id            String            @id @default(uuid())
+  name          String
+  openAt        DateTime
+  closeAt       DateTime
+  status        PhaseStatus       @default(LOCKED)
+  matches       Match[]
+  phaseStatuses UserPhaseStatus[]
+
+  @@map("phases")
+}
+
+model Match {
+  id            String       @id @default(uuid())
+  phaseId       String
+  phase         Phase        @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+  homeTeam      String
+  awayTeam      String
+  matchDate     DateTime
+  homeScoreReal Int?
+  awayScoreReal Int?
+  status        MatchStatus  @default(PENDING)
+  predictions   Prediction[]
+
+  @@map("matches")
+}
+
+model Prediction {
+  id                 String   @id @default(uuid())
+  userId             String
+  user               User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  matchId            String
+  match              Match    @relation(fields: [matchId], references: [id], onDelete: Cascade)
+  homeScorePredicted Int
+  awayScorePredicted Int
+  points             Int?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+
+  @@unique([userId, matchId])
+  @@map("predictions")
+}
+
+model UserPhaseStatus {
+  id      String     @id @default(uuid())
+  userId  String
+  user    User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  phaseId String
+  phase   Phase      @relation(fields: [phaseId], references: [id], onDelete: Cascade)
+  status  UserStatus @default(INACTIVE)
+
+  @@unique([userId, phaseId])
+  @@map("user_phase_statuses")
+}

@@ -1,0 +1,21 @@
+<svg width="200" height="200" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer circle with GEO-URP primary green theme -->
+  <circle cx="50" cy="50" r="46" stroke="#0F5A36" stroke-width="4" fill="#ffffff" />
+  
+  <!-- Central pentagon panel -->
+  <path d="M50 35 L64 45 L59 61 L41 61 L36 45 Z" fill="#0F5A36" />
+  
+  <!-- Panel boundary lines -->
+  <path d="M50 35 L50 4" stroke="#0F5A36" stroke-width="4" stroke-linecap="round" />
+  <path d="M64 45 L94 36" stroke="#0F5A36" stroke-width="4" stroke-linecap="round" />
+  <path d="M59 61 L78 88" stroke="#0F5A36" stroke-width="4" stroke-linecap="round" />
+  <path d="M41 61 L22 88" stroke="#0F5A36" stroke-width="4" stroke-linecap="round" />
+  <path d="M36 45 L6 36" stroke="#0F5A36" stroke-width="4" stroke-linecap="round" />
+
+  <!-- Outer pentagon panels -->
+  <polygon points="50,4 38,15 62,15" fill="#0F5A36" />
+  <polygon points="94,36 82,45 88,20" fill="#0F5A36" />
+  <polygon points="78,88 62,80 88,72" fill="#0F5A36" />
+  <polygon points="22,88 38,80 12,72" fill="#0F5A36" />
+  <polygon points="6,36 18,45 12,20" fill="#0F5A36" />
+</svg>
