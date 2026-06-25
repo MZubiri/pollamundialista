@@ -26,30 +26,8 @@ async function main() {
     },
   });
 
-  const activeUser = await prisma.user.create({
-    data: {
-      name: 'Juan Pérez',
-      email: 'juan@example.com',
-      passwordHash,
-      role: 'USER',
-      status: 'ACTIVE',
-    },
-  });
-
-  const inactiveUser = await prisma.user.create({
-    data: {
-      name: 'María Gómez',
-      email: 'maria@example.com',
-      passwordHash,
-      role: 'USER',
-      status: 'INACTIVE',
-    },
-  });
-
   console.log('Users seeded:', {
     admin: admin.email,
-    activeUser: activeUser.email,
-    inactiveUser: inactiveUser.email,
   });
 
   // Create Phases
@@ -114,36 +92,7 @@ async function main() {
     });
   }
 
-  // activeUser (Juan Pérez) is active only for "Ronda de 32" (phase1)
-  await prisma.userPhaseStatus.create({
-    data: {
-      userId: activeUser.id,
-      phaseId: phase1.id,
-      status: 'ACTIVE',
-    },
-  });
-
-  // activeUser is inactive for all other phases
-  for (const ph of [phase2, phase3, phase4, phase5]) {
-    await prisma.userPhaseStatus.create({
-      data: {
-        userId: activeUser.id,
-        phaseId: ph.id,
-        status: 'INACTIVE',
-      },
-    });
-  }
-
-  // inactiveUser (María Gómez) is inactive for all phases
-  for (const ph of phasesList) {
-    await prisma.userPhaseStatus.create({
-      data: {
-        userId: inactiveUser.id,
-        phaseId: ph.id,
-        status: 'INACTIVE',
-      },
-    });
-  }
+  // No mock users phase statuses
 
   // Create Matches
   // Ronda de 32 (Fase Abierta) - 16 Matches (32 Slots)
@@ -265,39 +214,7 @@ async function main() {
 
   console.log('Matches seeded.');
 
-  // Let's seed some predictions for the active user to have initial inputs (all pending, points null)
-  // Prediction for Lugar 1 vs Lugar 2 (m1)
-  await prisma.prediction.create({
-    data: {
-      userId: activeUser.id,
-      matchId: r32Matches[0].id,
-      homeScorePredicted: 2,
-      awayScorePredicted: 1,
-      points: null,
-    },
-  });
-
-  // Prediction for Lugar 3 vs Lugar 4 (m2)
-  await prisma.prediction.create({
-    data: {
-      userId: activeUser.id,
-      matchId: r32Matches[1].id,
-      homeScorePredicted: 1,
-      awayScorePredicted: 1,
-      points: null,
-    },
-  });
-
-  // Prediction for Lugar 5 vs Lugar 6 (m3)
-  await prisma.prediction.create({
-    data: {
-      userId: activeUser.id,
-      matchId: r32Matches[2].id,
-      homeScorePredicted: 3,
-      awayScorePredicted: 1,
-      points: null,
-    },
-  });
+  // No mock users predictions
 
   // Admin also makes a prediction on Lugar 1 vs Lugar 2
   await prisma.prediction.create({
